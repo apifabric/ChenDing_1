@@ -1,0 +1,97 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+
+Table Address {
+    id INTEGER [primary key]
+    customer_id INTEGER 
+    street VARCHAR 
+    city VARCHAR 
+    state VARCHAR 
+    zip_code VARCHAR 
+    }
+
+Table Customer {
+    id INTEGER [primary key]
+    name VARCHAR 
+    email VARCHAR 
+    phone VARCHAR 
+    }
+
+Table Employee {
+    id INTEGER [primary key]
+    name VARCHAR 
+    position VARCHAR 
+    hire_date DATETIME 
+    }
+
+Table Feedback {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    customer_id INTEGER 
+    comments VARCHAR 
+    }
+
+Table Order {
+    id INTEGER [primary key]
+    customer_id INTEGER 
+    date_placed DATETIME 
+    total_amount FLOAT 
+    }
+
+Table Inventory {
+    id INTEGER [primary key]
+    product_id INTEGER 
+    quantity_in_stock INTEGER 
+    }
+
+Table Product {
+    id INTEGER [primary key]
+    name VARCHAR 
+    description VARCHAR 
+    price FLOAT 
+    }
+
+Table OrderDetail {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    product_id INTEGER 
+    quantity INTEGER 
+    }
+
+Table Payment {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    amount_paid FLOAT 
+    payment_date DATETIME 
+    }
+
+Table Shipment {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    shipment_date DATETIME 
+    }
+
+Table StoreLocation {
+    id INTEGER [primary key]
+    address VARCHAR 
+    }
+
+Table Supplier {
+    id INTEGER [primary key]
+    name VARCHAR 
+    contact_name VARCHAR 
+    phone VARCHAR 
+    }
+
+
+
+// Relationships
+    Ref: Address.(customer_id) < Customer.(id)
+    Ref: Feedback.(customer_id) < Customer.(id)
+    Ref: Feedback.(order_id) < Order.(id)
+    Ref: Order.(customer_id) < Customer.(id)
+    Ref: Inventory.(product_id) < Product.(id)
+    Ref: OrderDetail.(order_id) < Order.(id)
+    Ref: OrderDetail.(product_id) < Product.(id)
+    Ref: Payment.(order_id) < Order.(id)
+    Ref: Shipment.(order_id) < Order.(id)
